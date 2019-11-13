@@ -33,7 +33,7 @@ export default {
   },
   created() {
     this.menu = [
-      { icon: "#zzdt", url: "/cropper", title: "图片裁剪" },
+      { icon: "#zzdt", url: "/Upload", title: "图片裁剪" },
       { icon: "#jczc", url: "", title: "图片裁剪" },
       { icon: "#jkgl", url: "", title: "图片裁剪" },
       { icon: "#OTO", url: "", title: "图片裁剪" },

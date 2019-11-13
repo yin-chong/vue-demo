@@ -1,5 +1,5 @@
 import Menu from '@/pages/Menu'
-import cropper from '@/pages/Cropper'
+import Upload from '@/pages/Upload'
 
 export default [
   {
@@ -11,9 +11,9 @@ export default [
     component: Menu
   },
   {
-    path: '/cropper',
-    name: 'cropper',
-    component: cropper,
-    meta: ['图片裁剪']
+    path: '/Upload',
+    name: 'Upload',
+    component: Upload,
+    meta: ['图片上传']
   }
 ]
