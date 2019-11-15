@@ -16,6 +16,8 @@
     "element-ui": "^2.12.0",
     "qs": "^6.7.0",
     "quill": "^1.3.7",
+    "quill-image-drop-module": "^1.0.3",
+    "quill-image-resize-module": "^3.0.0",
     "shn-vue-ui": "^1.3.0",
     "vue": "^2.6.10",
     "vue-cropper": "^0.4.9",
