@@ -1,4 +1,4 @@
-import Menu from '@/pages/menu'
+import Menu from '@/pages/Menu'
 import Upload from '@/pages/Upload'
 import Editor from '@/pages/Editor'
 import Animation from '@/pages/Animation'
