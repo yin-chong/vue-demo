@@ -1,11 +1,12 @@
 <template>
     <div>
         {{ JSON.stringify(doneTodos) }}
+        {{  JSON.stringify(todos)  }}
     </div>
 </template>
 
 <script>
-    import { mapGetters } from 'vuex'
+    import { mapGetters, mapState } from 'vuex'
     export default {
         name: 'Vuex',
         data () {
@@ -18,6 +19,9 @@
         },
 
         computed: {
+            ...mapState([
+                    'todos'
+            ]),
             ...mapGetters([
                 'doneTodos'
             ])
