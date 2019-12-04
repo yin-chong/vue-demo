@@ -1,4 +1,4 @@
-export const getters = {
+export default {
   doneTodos: state => {
     return state.todos.filter(todo => todo.done)
   }
