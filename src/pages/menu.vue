@@ -35,9 +35,12 @@ export default {
     this.menu = [
       { icon: "#zzdt", url: "/Upload", title: "图片裁剪" },
       { icon: "#jczc", url: "/Editor", title: "富文本" },
-      { icon: "#jkgl", url: "", title: "图片裁剪" },
-      { icon: "#OTO", url: "", title: "图片裁剪" },
-      { icon: "#yfbj", url: "", title: "图片裁剪" }
+      { icon: "#jkgl", url: "/Animation", title: "CSS动画" },
+      { icon: "#OTO", url: "/Star", title: "星空" },
+      { icon: "#yfbj", url: "/ironMan", title: "钢铁侠" },
+      { icon: '#OTO', url: '/Shape', title: 'CSS形状'},
+      { icon: '#zzdt', url: '/Vuex', title: 'Vuex'},
+      { icon: '#jczc', url: '/VueDND', title: '拖拽'}
     ];
   },
   methods: {
@@ -53,7 +56,7 @@ export default {
   display: grid;
   width: 100%;
   font-size: 16px;
-  grid-template-columns: repeat(3, 33.333%);
+  grid-template-columns: repeat(4, 25%);
   /* border-top: 1px solid #333;
     border-bottom: 1px solid #333;  */
 }
@@ -61,6 +64,9 @@ export default {
   padding: 5px 0;
   margin-bottom: 10px;
   text-align: center;
+}
+.grid:hover{
+  cursor: pointer;
 }
 .grid-icon {
   /* padding-left: 20px; */
