@@ -5,5 +5,9 @@ export default {
 
   getNum: state => {
     return state.num
+  },
+
+  getTodosById: (state) => (id) => {
+    return state.todos.find(todo => todo.id === id)
   }
 }

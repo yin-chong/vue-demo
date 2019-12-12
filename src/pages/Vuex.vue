@@ -2,7 +2,7 @@
   <div>
     {{ JSON.stringify(doneTodos) }}
     {{ JSON.stringify(todos) }}
-
+    {{ JSON.stringify(getTodosById(1)) }}
     {{  num  }}
     {{ getNum }}
 
@@ -23,7 +23,9 @@
     created () {
       // console.log(this.$store.state.todos);
     },
-
+    mounted(){
+     console.log(this.todos, this.num);
+    },
     methods: {
       test1 () {
         this.addNum(++this.num1)
@@ -44,7 +46,8 @@
       ]),
       ...mapGetters([
         'doneTodos',
-        'getNum'
+        'getNum',
+        'getTodosById'
       ])
     }
   }
