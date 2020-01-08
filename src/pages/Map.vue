@@ -4,7 +4,7 @@
         <!-- <el-input v-model="address_detail" placeholder="请输入公司名称" id="suggestId"></el-input> -->
     	<div id="allmap"></div>
         <el-input v-model="query" placeholder="" @change="queryPosition"></el-input>
-        
+
     </div>
 </template>
 
@@ -12,7 +12,7 @@
     //import BMap from 'BMap'
 import axios from 'axios'
    	export default {
-       name: 'Map',  
+       name: 'Map',
        data(){
            return {
                    pointA: {}, // 我的经纬度
@@ -42,34 +42,26 @@ import axios from 'axios'
            //  创建点坐标  (中航科技大厦)
            const point = new BMap.Point(118.810742, 32.04179);
            // 地图展示级别和中心点坐标
-           map.centerAndZoom(point, 15); 
+           map.centerAndZoom(point, 15);
            // 运行滚轮缩放
            map.enableScrollWheelZoom(true);
         //    设置地图显示的城市
-           map.setCurrentCity("南京");   
+           map.setCurrentCity("南京");
            const point1 = new BMap.Point(this.pointA.lng, this.pointA.lat);
            const distance = (map.getDistance(point1, point)).toFixed(2) //保留2位小数
            console.log(distance);
            // 将2点用线连接显示在地图上
-           const polyline = new BMap.Polyline([point1,point], {strokeColor:"blue", strokeWeight:6, strokeOpacity:0.5});  
+           const polyline = new BMap.Polyline([point1,point], {strokeColor:"blue", strokeWeight:6, strokeOpacity:0.5});
            map.addOverlay(polyline);
          },
         //  地址查询
         queryPosition(){
             const query = this.query;
-            console.log('http://api.map.baidu.com/place/v2/suggestion?output=json&ak=xY7kZjVZdY2rL5brH2UyBuUdN3uYIKYG&region=南京&city_limit=true&query='+query);
-            axios({
-            method:'get',
-            url:'http://api.map.baidu.com/place/v2/suggestion?output=json&ak=xY7kZjVZdY2rL5brH2UyBuUdN3uYIKYG&region=南京&city_limit=true&query='+query,
-            headers: {
-              'Content-Type': 'jsonp',
-            }
-            })
-            .then(res => {
-                console.log(res)
-            })
-            .catch(err => {
-                console.error(err); 
+            const url = 'http://api.map.baidu.com/place/v2/suggestion?output=json&ak=xY7kZjVZdY2rL5brH2UyBuUdN3uYIKYG&region=南京&city_limit=true&query='+query
+            this.$jsonp(url, {}).then(res => {
+              console.log(res)
+            }).catch(err => {
+              console.log(err)
             })
         }
        }
