@@ -41,7 +41,7 @@ export default {
       { icon: '#OTO', url: '/Shape', title: 'CSS形状'},
       { icon: '#zzdt', url: '/Vuex', title: 'Vuex'},
       { icon: '#jczc', url: '/VueDND', title: '拖拽'},
-      { icon: '#OTO', url: '/Reckon', title: '员福报价'}
+      { icon: '#zzdt', url: '/Map', title: '百度地图'}
     ];
   },
   methods: {

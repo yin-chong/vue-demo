@@ -16,6 +16,9 @@ module.exports = {
   publicPath,
   outputDir,
   configureWebpack: {
+    externals: {
+      'BMap': 'BMap'
+    },
     output: {
       filename: '[name].[hash].bundle.js'
     },

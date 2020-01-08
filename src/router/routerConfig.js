@@ -7,8 +7,7 @@ import ironMan from '@/pages/ironMan'
 import Shape from '@/pages/Shape'
 import Vuex from '@/pages/Vuex'
 import VueDND from '@/pages/VueDND'
-import Reckon from '@/pages/BF/Reckon'
-import Result from '@/pages/BF/Result'
+import Map from '@/pages/Map'
 
 export default [
   {
@@ -68,15 +67,9 @@ export default [
     meta: ['VueDND']
   },
   {
-    path: '/Reckon',
-    name: 'Reckon',
-    component: Reckon,
-    meta: ['保费计算']
-  },
-  {
-    path: '/Result',
-    name: 'Result',
-    component: Result,
-    meta: ['保费计算结果']
+    path: '/Map',
+    name: 'Map',
+    component: Map,
+    meta: ['Map']
   }
 ]
