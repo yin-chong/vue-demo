@@ -24,19 +24,23 @@ export default {
     };
   },
   created() {
-     const geolocation = new BMap.Geolocation({
-         maximumAge:10  // 清除缓存
-     });
-     geolocation.getCurrentPosition((res) =>{
-       alert(res)
-       console.log(res);
-     this.pointA = new BMap.Point(res.point.lng, res.point.lat)  // 通过浏览器获得我的经纬度
-     console.log(this.pointA);
-     this.createMap()
-     })
+    //  const geolocation = new BMap.Geolocation({
+    //      maximumAge:10  // 清除缓存
+    //  });
+    //  geolocation.getCurrentPosition((res) =>{
+    //    alert(res)
+    //    console.log(res);
+    //  this.pointA = new BMap.Point(res.point.lng, res.point.lat)  // 通过浏览器获得我的经纬度
+    //  console.log(this.pointA);
+    //  this.createMap()
+    //  })
+    this.$jsonp(
+      "http://api.map.baidu.com/location/ip?qt=loc&coor=bd09ll&ak=xY7kZjVZdY2rL5brH2UyBuUdN3uYIKYG&timeout=10000"
+    ).then(res => {
+      console.log(res);
+    });
   },
-  mounted() {
-  },
+  mounted() {},
   methods: {
     createMap() {
       //  创建地图实例
@@ -56,7 +60,7 @@ export default {
       const point1 = new BMap.Point(this.pointA.lng, this.pointA.lat);
       const distance = map.getDistance(point1, point).toFixed(2); //保留2位小数
       console.log(distance);
-      alert(distance)
+      alert(distance);
       // 将2点用线连接显示在地图上
       const polyline = new BMap.Polyline([point1, point], {
         strokeColor: "blue",
