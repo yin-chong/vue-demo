@@ -25,7 +25,10 @@ module.exports = {
     resolve: {
       extensions: ['.js', '.json', '.vue']
     },
-    plugins
+    plugins,
+    devServer: {
+      proxy: 'http://dev.test.baidu.com:8080'
+    }
   },
 
   chainWebpack: config => {
