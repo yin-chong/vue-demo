@@ -23,7 +23,7 @@
         query: '', // 查询,
         loading: true,
         interval: null,
-
+        geolocationInfo: ''
       }
     },
     created () {
@@ -31,19 +31,8 @@
         maximumAge: 10  // 清除缓存
       })
       geolocation.getCurrentPosition((res) => {
-        if (!res) {
-          this.interval =setInterval(() => {
-            if (this.loading) {
-              this.$message.info('它还在加载不要失去希望，谢谢，当然它只是在本地环境这样，如果在线上不会出现这种问题的')
-            }
-          }, 10000)
-          return this.$message.warning('您的地址正在赶来的路上，不要尝试重刷或者关闭浏览器，放着让它加载，它只是有点慢')
-        }
-
-        this.loading = false
-        this.$message.success('😂，你的地址终于到了，久等了')
-        this.pointA = new BMap.Point(res.point.lng, res.point.lat)  // 通过浏览器获得我的经纬度
-        this.createMap()
+          this.pointA = new BMap.Point(res.point.lng, res.point.lat)
+          this.geolocationInfo = res
       }, () => {
         this.$message.error('哎呀，百度地图有问题了，快去告诉它')
         this.loading = false
@@ -58,10 +47,28 @@
     watch:  {
       loading (val) {
         if (!val) clearInterval(this.interval)
+      },
+      geolocationInfo (info) {
+        if (info === null) {
+          this.interval =setInterval(() => {
+            if (this.loading) {
+              this.$message.info('它还在加载不要失去希望，谢谢，当然它只是在本地环境这样，如果在线上不会出现这种问题的')
+            }
+          }, 10000)
+          this.$message.warning('您的地址正在赶来的路上，不要尝试重刷或者关闭浏览器，放着让它加载，它只是有点慢')
+        } else {
+          this.useGeolocationInfo()
+        }
+
       }
     },
 
     methods: {
+      useGeolocationInfo () {
+        this.loading = false
+        this.$message.success('😂，你的地址终于到了，久等了')
+        this.createMap()
+      },
       createMap () {
         //  创建地图实例
         const map = new BMap.Map('allmap', {
