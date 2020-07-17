@@ -8,6 +8,11 @@ import Shape from '@/pages/Shape'
 import Vuex from '@/pages/Vuex'
 import VueDND from '@/pages/VueDND'
 import Map from '@/pages/Map'
+import iTable from '@/pages/iTable'
+import stack from '@/pages/stack'
+import queue from '@/pages/queue'
+import Set from '@/pages/Set'
+import myLinkedList from '@/pages/myLinkedList'
 
 export default [
   {
@@ -71,5 +76,35 @@ export default [
     name: 'Map',
     component: Map,
     meta: ['Map']
+  },
+  {
+    path: '/iTable',
+    name: 'iTable',
+    component: iTable,
+    meta: ['表格']
+  },
+  {
+    path: '/stack',
+    name: 'stack',
+    component: stack,
+    meta: ['栈']
+  },
+  {
+    path: '/queue',
+    name: 'queue',
+    component: queue,
+    meta: ['队列']
+  },
+  {
+    path: '/myLinkedList',
+    name: 'myLinkedList',
+    component: myLinkedList,
+    meta: ['链表']
+  },
+  {
+    path: '/Set',
+    name: 'Set',
+    component: Set,
+    meta: ['集合']
   }
 ]

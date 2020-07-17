@@ -41,7 +41,12 @@ export default {
       { icon: '#OTO', url: '/Shape', title: 'CSS形状'},
       { icon: '#zzdt', url: '/Vuex', title: 'Vuex'},
       { icon: '#jczc', url: '/VueDND', title: '拖拽'},
-      { icon: '#zzdt', url: '/Map', title: '百度地图'}
+      { icon: '#zzdt', url: '/Map', title: '地图'},
+      { icon: '#OTO', url: '/iTable', title: '表格'},
+      { icon: '#zzdt', url: '/stack', title: '栈'},
+      { icon: '#OTO', url: '/queue', title: '队列'},
+      { icon: '#yfbj', url: '/Set', title: '集合'},
+      { icon: '#jczc', url: '/myLinkedList', title: '链表'}
     ];
   },
   methods: {

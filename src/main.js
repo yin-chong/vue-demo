@@ -11,9 +11,9 @@ import './style/main.css'
 import shnUI from 'shn-vue-ui'
 import VueDND from 'awe-dnd'
 import VueJsonp from 'vue-jsonp'
-import VConsole from 'vconsole'
+// import VConsole from 'vconsole'
 
-(new VConsole())
+// (new VConsole())
 
 Vue.prototype.$api = processApiConfig(apiConfig)
 
