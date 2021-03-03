@@ -5,5 +5,11 @@ module.exports = {
     'alias': {
       '@': path.resolve(__dirname, 'src')
     }
-  }
+  },
+  'rule': [
+    {
+      test: /\.scss$/,
+      loaders: ['style-loader', 'css-loader', 'sass-loader']
+    }
+  ]
 }

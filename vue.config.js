@@ -15,6 +15,13 @@ module.exports = {
   lintOnSave,
   publicPath,
   outputDir,
+  css: {
+    loaderOptions: {
+      scss: {
+        additionalData: `@import "~@/style/main.scss";`
+      }
+    }
+  },
   configureWebpack: {
     output: {
       filename: '[name].[hash].bundle.js'
@@ -29,6 +36,18 @@ module.exports = {
   },
 
   chainWebpack: config => {
+    const oneOfsMap = config.module.rule('scss').oneOfs.store
+    oneOfsMap.forEach(item => {
+      item
+        .use('sass-resources-loader')
+        .loader('sass-resources-loader')
+        .options({
+          // Provide path to the file with resources
+          // 要公用的scss的路径
+          resources: './src/style/main.scss'
+        })
+        .end()
+    })
     config.plugin('html')
       .tap(args => {
         args[0].minimize = isProdBuild

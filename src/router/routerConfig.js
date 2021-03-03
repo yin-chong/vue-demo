@@ -13,6 +13,7 @@ import stack from '@/pages/stack'
 import queue from '@/pages/queue'
 import Set from '@/pages/Set'
 import myLinkedList from '@/pages/myLinkedList'
+import Sass from '@/pages/Sass'
 
 export default [
   {
@@ -106,5 +107,11 @@ export default [
     name: 'Set',
     component: Set,
     meta: ['集合']
+  },
+  {
+    path: '/Sass',
+    name: 'Sass',
+    component: Sass,
+    meta: ['Sass']
   }
 ]

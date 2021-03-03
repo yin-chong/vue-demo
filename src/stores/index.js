@@ -8,8 +8,8 @@ Vue.use(Vuex)
 
 const state = {
   todos: [
-    { id: 1, text: '....', done: true },
-    { id: 2, text: '....', done: false }
+    { id: 1, text: '张三', done: true },
+    { id: 2, text: '李四', done: false }
   ],
   num: 0
 }

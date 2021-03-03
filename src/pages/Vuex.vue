@@ -1,10 +1,10 @@
 <template>
   <div>
-    {{ JSON.stringify(doneTodos) }}
-    {{ JSON.stringify(todos) }}
-    {{ JSON.stringify(getTodosById(1)) }}
-    {{  num  }}
-    {{ getNum }}
+    {{ JSON.stringify(doneTodos) }}  <br/>
+    {{ JSON.stringify(todos) }}  <br/>
+    {{ JSON.stringify(getTodosById(1)) }} <br/>
+    {{  num  }} <br/>
+    {{ getNum }} <br/>
 
     <button @click="test1">测试</button>
   </div>
@@ -37,9 +37,9 @@
     },
 
     computed: {
-      test () {
-        return this.$store.state.todos
-      },
+      // test () {
+      //   return this.$store.state.todos
+      // },
       ...mapState([
         'todos',
         'num'

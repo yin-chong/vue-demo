@@ -46,7 +46,8 @@ export default {
       { icon: '#zzdt', url: '/stack', title: '栈'},
       { icon: '#OTO', url: '/queue', title: '队列'},
       { icon: '#yfbj', url: '/Set', title: '集合'},
-      { icon: '#jczc', url: '/myLinkedList', title: '链表'}
+      { icon: '#jczc', url: '/myLinkedList', title: '链表'},
+      { icon: '#OTO', url: '/Sass', title: 'Sass'}
     ];
   },
   methods: {
