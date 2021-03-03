@@ -1,6 +1,7 @@
 /* eslint-disable new-parens */
 const isProdBuild = process.env.NODE_ENV === 'production'
 const isDevBuild = !isProdBuild // process.env.NODE_ENV === 'dev'
+const path = require('path')
 
 const publicPath = isDevBuild ? '' : ''
 const outputDir = isDevBuild ? 'output' : 'output'
@@ -15,11 +16,21 @@ module.exports = {
   lintOnSave,
   publicPath,
   outputDir,
+  css: {
+    loaderOptions: {
+      scss: {
+        additionalData: `@import "~@/style/main.scss";`
+      }
+    }
+  },
   configureWebpack: {
     output: {
       filename: '[name].[hash].bundle.js'
     },
     resolve: {
+      alias: {
+        '@': path.resolve(__dirname, 'src')
+      },
       extensions: ['.js', '.json', '.vue']
     },
     plugins,
@@ -28,9 +39,9 @@ module.exports = {
     }
   },
 
-  chainWebpack: config => {
+  chainWebpack: (config) => {
     const oneOfsMap = config.module.rule('scss').oneOfs.store
-    oneOfsMap.forEach(item => {
+    oneOfsMap.forEach((item) => {
       item
         .use('sass-resources-loader')
         .loader('sass-resources-loader')
@@ -41,10 +52,9 @@ module.exports = {
         })
         .end()
     })
-    config.plugin('html')
-      .tap(args => {
-        args[0].minimize = isProdBuild
-        return args
-      })
+    config.plugin('html').tap((args) => {
+      args[0].minimize = isProdBuild
+      return args
+    })
   }
 }
