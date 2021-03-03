@@ -31,7 +31,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../style/main.scss";
 $main-width: 94.67%;
 // $main-width: 22.19rem;
 @mixin main-center {
@@ -44,6 +43,8 @@ $main-width: 94.67%;
   height: 10.44rem;
   background-color: #22c49e;
   padding-top: 2rem;
+
+  @include test;
 
   &-title {
     @include row-between;
