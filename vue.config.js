@@ -1,11 +1,12 @@
 /* eslint-disable new-parens */
-const isProdBuild = process.env.NODE_ENV === 'production'
-const isDevBuild = !isProdBuild // process.env.NODE_ENV === 'dev'
+const isProdBuild = process.env.NODE_ENV === "production";
+const isDevBuild = !isProdBuild; // process.env.NODE_ENV === 'dev'
+const path = require("path");
 
-const publicPath = isDevBuild ? '' : ''
-const outputDir = isDevBuild ? 'output' : 'output'
-const lintOnSave = false
-const plugins = []
+const publicPath = isDevBuild ? "" : "";
+const outputDir = isDevBuild ? "output" : "output";
+const lintOnSave = false;
+const plugins = [];
 
 if (isDevBuild) {
   // plugins.push(new BundleAnalyzerPlugin)
@@ -18,40 +19,42 @@ module.exports = {
   css: {
     loaderOptions: {
       scss: {
-        additionalData: `@import "~@/style/main.scss";`
-      }
-    }
+        additionalData: `@import "~@/style/main.scss";`,
+      },
+    },
   },
   configureWebpack: {
     output: {
-      filename: '[name].[hash].bundle.js'
+      filename: "[name].[hash].bundle.js",
     },
     resolve: {
-      extensions: ['.js', '.json', '.vue']
+      alias: {
+        '@': path.resolve(__dirname, 'src')
+      },
+      extensions: [".js", ".json", ".vue"],
     },
     plugins,
     devServer: {
-      proxy: 'http://dev.test.baidu.com:8080'
-    }
+      proxy: "http://dev.test.baidu.com:8080",
+    },
   },
 
-  chainWebpack: config => {
-    const oneOfsMap = config.module.rule('scss').oneOfs.store
-    oneOfsMap.forEach(item => {
+  chainWebpack: (config) => {
+    const oneOfsMap = config.module.rule("scss").oneOfs.store;
+    oneOfsMap.forEach((item) => {
       item
-        .use('sass-resources-loader')
-        .loader('sass-resources-loader')
+        .use("sass-resources-loader")
+        .loader("sass-resources-loader")
         .options({
           // Provide path to the file with resources
           // 要公用的scss的路径
-          resources: './src/style/main.scss'
+          resources: "./src/style/main.scss",
         })
-        .end()
-    })
-    config.plugin('html')
-      .tap(args => {
-        args[0].minimize = isProdBuild
-        return args
-      })
-  }
-}
+        .end();
+    });
+    config.plugin("html").tap((args) => {
+      args[0].minimize = isProdBuild;
+      return args;
+    });
+  },
+};
