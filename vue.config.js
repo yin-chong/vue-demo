@@ -15,13 +15,6 @@ module.exports = {
   lintOnSave,
   publicPath,
   outputDir,
-  css: {
-    loaderOptions: {
-      scss: {
-        additionalData: `@import "~@/style/main.scss";`
-      }
-    }
-  },
   configureWebpack: {
     output: {
       filename: '[name].[hash].bundle.js'

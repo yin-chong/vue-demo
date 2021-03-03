@@ -23,7 +23,7 @@ Vue.use(ElementUI)
 Vue.use(VueDND)
 Vue.use(shnUI)
 Vue.use(VueJsonp)
-Vue.use(Vant);
+Vue.use(Vant)
 Object.values(components).forEach(compItem => {
   Vue.component(compItem.name, { ...compItem })
 })

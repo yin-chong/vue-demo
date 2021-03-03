@@ -4,9 +4,9 @@
 $font-size: 16px !default;
 
 // px转rem
-@function rem($px) {
-    @return $px * 1px / $font-size * 1rem
-}
+// @function rem($px) {
+//     @return $px * 1px / $font-size * 1rem
+// }
 
 html {
     width: 100%;
