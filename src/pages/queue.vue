@@ -1,19 +1,19 @@
 <template>
   <div>
-    <el-row :gutter="40">
-      <el-col :span="6">
+    <el-row :gutter="10">
+      <el-col :span="10">
         <el-input
           v-model="num"
           placeholder="请输入大于0的整数"
         ></el-input>
       </el-col>
-      <el-col :span="4">
+      <el-col :span="6">
         <el-button
           type="primary"
           @click="pass"
         >击鼓传花</el-button>
       </el-col>
-      <el-col :span="6">
+      <el-col :span="8">
         <el-input
           v-model="name"
           placeholder="获胜的选手"

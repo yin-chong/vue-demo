@@ -30,6 +30,16 @@ Object.values(components).forEach(compItem => {
 
 Vue.config.productionTip = false
 router.beforeEach((to, from, next) => {
+  if (to.meta.title) {
+    document.title = to.meta.title
+  }
+  // if (from.meta.index > to.meta.index && to.meta.keep) {
+  //   to.meta.keepAlive = true
+  //   console.log(to.meta.keepAlive)
+  // } else {
+  //   to.meta.keepAlive = false
+  //   console.log(to.meta.keepAlive)
+  // }
   next()
 })
 

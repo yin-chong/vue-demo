@@ -36,18 +36,17 @@ export default {
       { icon: "#zzdt", url: "/Upload", title: "图片裁剪" },
       { icon: "#jczc", url: "/Editor", title: "富文本" },
       { icon: "#jkgl", url: "/Animation", title: "CSS动画" },
-      { icon: "#OTO", url: "/Star", title: "星空" },
       { icon: "#yfbj", url: "/ironMan", title: "钢铁侠" },
-      { icon: '#OTO', url: '/Shape', title: 'CSS形状'},
       { icon: '#zzdt', url: '/Vuex', title: 'Vuex'},
       { icon: '#jczc', url: '/VueDND', title: '拖拽'},
-      { icon: '#zzdt', url: '/Map', title: '地图'},
-      { icon: '#OTO', url: '/iTable', title: '表格'},
       { icon: '#zzdt', url: '/stack', title: '栈'},
       { icon: '#OTO', url: '/queue', title: '队列'},
       { icon: '#yfbj', url: '/Set', title: '集合'},
       { icon: '#jczc', url: '/myLinkedList', title: '链表'},
-      { icon: '#OTO', url: '/Sass', title: 'Sass'}
+      { icon: '#OTO', url: '/Sass', title: 'Sass'},
+      { icon: '#yfbj', url: '/Radio', title: 'Radio'},
+      { icon: '#zzdt', url: '/Loading', title: 'Loading'},
+      { icon: '#OTO', url: '/keep', title: 'keepAlive'}
     ];
   },
   methods: {
@@ -60,6 +59,7 @@ export default {
 
 <style scoped>
 .grids {
+  margin-top: 15px;
   display: grid;
   width: 100%;
   font-size: 16px;

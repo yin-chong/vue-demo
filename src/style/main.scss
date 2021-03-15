@@ -1,37 +1,26 @@
 @charset 'utf-8';
-
-// 声明字体变量
-$font-size: 16px !default;
-
-@mixin test {
-    background-color: red;
-}
-
-// px转rem
-// @function rem($px) {
-//     @return $px * 1px / $font-size * 1rem
-// }
-
-html {
-    width: 100%;
-    height: 100%;
-    font-family: PingFang-SC-Medium;
-    box-sizing: border-box;
-    font-size: $font-size;
-}
+@import '_config';
 
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
+html {
+    width: 100%;
+    height: 100vh;
+    font-size: $font-size;
 
+    body, #app {
+        height: 100vh;
+        background-color: $light-color;
+        font-family: $font-stack;
+        line-height: 1.6;
+    }
+}
 a {
     text-decoration: none;
 }
-
-@mixin row-between {
+img {
     width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
 }

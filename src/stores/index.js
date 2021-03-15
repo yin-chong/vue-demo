@@ -7,11 +7,14 @@ import getters from './getters'
 Vue.use(Vuex)
 
 const state = {
-  todos: [
-    { id: 1, text: '张三', done: true },
-    { id: 2, text: '李四', done: false }
+  list: [
+    { id: 0, value: '这是待办事项A', done: false },
+    { id: 1, value: '这是待办事项B', done: false },
+    { id: 2, value: '这是待办事项C', done: true },
+    { id: 3, value: '这是待办事项D', done: false }
   ],
-  num: 0
+  // 路由keepAlive
+  keepAlive: []
 }
 
 export default new Vuex.Store({

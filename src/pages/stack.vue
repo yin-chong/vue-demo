@@ -1,19 +1,19 @@
 <template>
   <div>
-    <el-row :gutter="40">
-      <el-col :span="6">
+    <el-row :gutter="5">
+      <el-col :span="8">
         <el-input
           v-model="decNumber"
           placeholder="请输入十进制整数"
         ></el-input>
       </el-col>
-      <el-col :span="4">
+      <el-col :span="9">
         <el-button
           type="primary"
           @click="decTobin"
         >十进制转二进制</el-button>
       </el-col>
-      <el-col :span="6">
+      <el-col :span="7">
         <el-input
           v-model="binNumber"
           placeholder="转换后的二进制数字"

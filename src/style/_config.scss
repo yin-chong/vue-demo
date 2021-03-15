@@ -1,0 +1,53 @@
+@charset 'utf-8';
+// 声明字体变量
+$font-size: 16px;
+// px转rem
+// @function rem($px) {
+//     @return $px * 1px / $font-size * 1rem
+// }
+$light-color: #fff;
+// $light-color: #f4f4f4;
+$font-stack: Arial, Helvetica, sans-serif;
+// $primary-color: #e0ffff;
+$primary-color: #0e6cff;
+$secondary-color: #ff8700;
+
+%btn {
+    display: inline-block;
+    border-radius: 5px;
+    padding: 8px 20px;
+    margin: 3px;
+
+    &:hover {
+        transform: scale(.98);
+    }
+}
+
+@function set-text-color($color) {
+    @if(lightness($color) > 70) {
+        @return #333
+    }@else {
+        @return #fff;
+    }
+}
+
+@mixin set-background($color) {
+    background-color: $color;
+    color: set-text-color($color);
+}
+
+// Sass 循环
+$spaceamounts: (1,2,3,4,5);
+
+@each $space in  $spaceamounts{
+    .my-#{$space} {
+        margin: #{$space}rem 0;
+    }
+}
+
+// flex位置居中
+@mixin pos-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

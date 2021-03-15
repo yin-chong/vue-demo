@@ -1,13 +1,15 @@
 export default {
-  doneTodos: state => {
-    return state.todos.filter(todo => todo.done)
+  // 事项列表长度
+  listLength: state => state.list.length,
+  // 未完成事项数量
+  listUndone (state) {
+    let unDone = 0
+    state.list.forEach(el => {
+      if (!el.done) unDone += 1
+    })
+    return unDone
   },
 
-  getNum: state => {
-    return state.num
-  },
-
-  getTodosById: (state) => (id) => {
-    return state.todos.find(todo => todo.id === id)
-  }
+  // 获取keepAlive
+  keepAlive: state => state.keepAlive
 }
