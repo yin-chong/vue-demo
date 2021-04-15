@@ -79,7 +79,6 @@ export default {
     }
   }
 
-
   &-content {
     height: 100%;
     display: flex;
@@ -116,16 +115,16 @@ export default {
   @include set-background($secondary-color);
 }
 
-@media(max-width: 700px) {
+@media (max-width: 700px) {
   .showcase {
     height: 400px;
 
     &-content {
       text-align: center;
     }
-     img {
-       display: none;
-     }
+    img {
+      display: none;
+    }
   }
 }
 </style>

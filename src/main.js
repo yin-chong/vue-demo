@@ -13,11 +13,13 @@ import VueDND from 'awe-dnd'
 import VueJsonp from 'vue-jsonp'
 import Vant from 'vant'
 import 'vant/lib/index.css'
+import toast from '@/components/Toast/index'
 // import VConsole from 'vconsole'
 
 // (new VConsole())
 
 Vue.prototype.$api = processApiConfig(apiConfig)
+Vue.prototype.$toast = toast
 
 Vue.use(ElementUI)
 Vue.use(VueDND)
@@ -27,19 +29,11 @@ Vue.use(Vant)
 Object.values(components).forEach(compItem => {
   Vue.component(compItem.name, { ...compItem })
 })
-
 Vue.config.productionTip = false
 router.beforeEach((to, from, next) => {
   if (to.meta.title) {
     document.title = to.meta.title
   }
-  // if (from.meta.index > to.meta.index && to.meta.keep) {
-  //   to.meta.keepAlive = true
-  //   console.log(to.meta.keepAlive)
-  // } else {
-  //   to.meta.keepAlive = false
-  //   console.log(to.meta.keepAlive)
-  // }
   next()
 })
 

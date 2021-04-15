@@ -14,7 +14,7 @@ const state = {
     { id: 3, value: '这是待办事项D', done: false }
   ],
   // 路由keepAlive
-  keepAlive: []
+  keepAlive: ['keep']
 }
 
 export default new Vuex.Store({

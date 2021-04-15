@@ -46,8 +46,19 @@ export default {
       { icon: '#OTO', url: '/Sass', title: 'Sass'},
       { icon: '#yfbj', url: '/Radio', title: 'Radio'},
       { icon: '#zzdt', url: '/Loading', title: 'Loading'},
+      { icon: '#jczc', url: '/calendar', title: '日历'},
       { icon: '#OTO', url: '/keep', title: 'keepAlive'}
     ];
+    // this.$message({
+    //   type: 'success',
+    //   message: '这是提示内容这是提示内容这是提示内容这是提示内容这是提示内容',
+    //   duration: 0,
+    //   showClose: true
+    // })
+    // this.$toast({
+    //   type: 'success',
+    //   message: '123'
+    // })
   },
   methods: {
     menuSkip(item) {

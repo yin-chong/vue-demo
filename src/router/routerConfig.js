@@ -12,6 +12,7 @@ import myLinkedList from '@/pages/myLinkedList'
 import Sass from '@/pages/Sass'
 import Loading from '@/pages/Loading'
 import Radio from '@/pages/Radio'
+import calendar from '@/pages/calendar'
 import keep from '@/pages/keep/keep'
 import keep1 from '@/pages/keep/keep1'
 
@@ -145,6 +146,15 @@ export default [
     meta: {
       index: 1,
       title: 'Loading'
+    }
+  },
+  {
+    path: '/calendar',
+    name: 'calendar',
+    component: calendar,
+    meta: {
+      index: 1,
+      title: '日历'
     }
   },
   {

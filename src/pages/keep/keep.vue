@@ -25,6 +25,9 @@ export default {
       value: "",
     };
   },
+  created () {
+    console.log(2);
+  },
   methods: {
     ...mapActions(["setKeepAlive"]),
   },

@@ -18,19 +18,18 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 export default {
   name: "app",
   data() {
     return {
-      transName: ""
+      transName: "",
     };
   },
   components: {},
-  created() {
-  },
+  created() {},
   computed: {
-    ...mapGetters(['keepAlive'])
+    ...mapGetters(["keepAlive"]),
   },
   watch: {
     $route(to, from) {

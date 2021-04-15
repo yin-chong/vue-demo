@@ -29,7 +29,6 @@ export default {
     } else {
       this.setKeepAlive();
     }
-    console.log(this.$store.getters.keepAlive);
     next();
   },
 };
