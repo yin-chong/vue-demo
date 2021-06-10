@@ -1,4 +1,4 @@
-import Menu from '@/pages/Menu'
+import Menu from '@/pages/menu'
 import Upload from '@/pages/Upload'
 import Editor from '@/pages/Editor'
 import Animation from '@/pages/Animation'
@@ -15,9 +15,9 @@ import Radio from '@/pages/Radio'
 import calendar from '@/pages/calendar'
 import keep from '@/pages/keep/keep'
 import keep1 from '@/pages/keep/keep1'
+import myTable from '@/pages/myTable'
 
-export default [
-  {
+export default [{
     path: '*',
     redirect: 'Menu'
   },
@@ -155,6 +155,15 @@ export default [
     meta: {
       index: 1,
       title: '日历'
+    }
+  },
+  {
+    path: '/myTable',
+    name: 'myTable',
+    component: myTable,
+    meta: {
+      index: 1,
+      title: '自动化表格'
     }
   },
   {

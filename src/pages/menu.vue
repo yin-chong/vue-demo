@@ -9,14 +9,15 @@
       >
         <div class="grid-icon">
           <svg-icon
-            :icon-symbol-id='item.icon'
-            :svg-size-config='{
-                      width: "40px", height:"40px"
-                  }'
+            :icon-symbol-id="item.icon"
+            :svg-size-config="{
+              width: '40px',
+              height: '40px',
+            }"
           ></svg-icon>
         </div>
         <div class="grid-title">
-          {{item.title}}
+          {{ item.title }}
         </div>
       </div>
     </div>
@@ -28,7 +29,7 @@ export default {
   name: "Menu",
   data() {
     return {
-      menu: []
+      menu: [],
     };
   },
   created() {
@@ -37,17 +38,18 @@ export default {
       { icon: "#jczc", url: "/Editor", title: "富文本" },
       { icon: "#jkgl", url: "/Animation", title: "CSS动画" },
       { icon: "#yfbj", url: "/ironMan", title: "钢铁侠" },
-      { icon: '#zzdt', url: '/Vuex', title: 'Vuex'},
-      { icon: '#jczc', url: '/VueDND', title: '拖拽'},
-      { icon: '#zzdt', url: '/stack', title: '栈'},
-      { icon: '#OTO', url: '/queue', title: '队列'},
-      { icon: '#yfbj', url: '/Set', title: '集合'},
-      { icon: '#jczc', url: '/myLinkedList', title: '链表'},
-      { icon: '#OTO', url: '/Sass', title: 'Sass'},
-      { icon: '#yfbj', url: '/Radio', title: 'Radio'},
-      { icon: '#zzdt', url: '/Loading', title: 'Loading'},
-      { icon: '#jczc', url: '/calendar', title: '日历'},
-      { icon: '#OTO', url: '/keep', title: 'keepAlive'}
+      { icon: "#zzdt", url: "/Vuex", title: "Vuex" },
+      { icon: "#jczc", url: "/VueDND", title: "拖拽" },
+      { icon: "#zzdt", url: "/stack", title: "栈" },
+      { icon: "#OTO", url: "/queue", title: "队列" },
+      { icon: "#yfbj", url: "/Set", title: "集合" },
+      { icon: "#jczc", url: "/myLinkedList", title: "链表" },
+      { icon: "#OTO", url: "/Sass", title: "Sass" },
+      { icon: "#yfbj", url: "/Radio", title: "Radio" },
+      { icon: "#zzdt", url: "/Loading", title: "Loading" },
+      { icon: "#jczc", url: "/calendar", title: "日历" },
+      { icon: "#yfbj", url: "/myTable", title: "自动化表格" },
+      { icon: "#OTO", url: "/keep", title: "keepAlive" },
     ];
     // this.$message({
     //   type: 'success',
@@ -63,8 +65,8 @@ export default {
   methods: {
     menuSkip(item) {
       this.$router.push(item);
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -83,7 +85,7 @@ export default {
   margin-bottom: 10px;
   text-align: center;
 }
-.grid:hover{
+.grid:hover {
   cursor: pointer;
 }
 .grid-icon {
