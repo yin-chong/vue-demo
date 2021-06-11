@@ -49,6 +49,7 @@ export default {
       { icon: "#zzdt", url: "/Loading", title: "Loading" },
       { icon: "#jczc", url: "/calendar", title: "日历" },
       { icon: "#yfbj", url: "/myTable", title: "自动化表格" },
+      { icon: "#zzdt", url: "/markDown", title: "MarkDown" },
       { icon: "#OTO", url: "/keep", title: "keepAlive" },
     ];
     // this.$message({

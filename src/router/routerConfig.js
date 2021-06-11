@@ -16,6 +16,7 @@ import calendar from '@/pages/calendar'
 import keep from '@/pages/keep/keep'
 import keep1 from '@/pages/keep/keep1'
 import myTable from '@/pages/myTable'
+import markDown from '@/pages/markDown'
 
 export default [{
     path: '*',
@@ -164,6 +165,15 @@ export default [{
     meta: {
       index: 1,
       title: '自动化表格'
+    }
+  },
+  {
+    path: '/markDown',
+    name: 'markDown',
+    component: markDown,
+    meta: {
+      index: 1,
+      title: 'MarkDown'
     }
   },
   {
