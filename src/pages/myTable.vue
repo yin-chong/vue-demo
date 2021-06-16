@@ -27,21 +27,21 @@
       :editWidth="400"
       rowKey="name"
       @multipleSelect="getMultipleSelection"
+      @cellClick="getRowInfo"
       v-loading="false"
     >
-      <template v-slot:default="slotProps">
-        <el-button type="primary" size="mini">{{
-          slotProps.row.name
-        }}</el-button>
-        <el-button type="primary" size="mini">{{
-          slotProps.row.name
-        }}</el-button>
-        <el-button type="primary" size="mini">{{
-          slotProps.row.name
-        }}</el-button>
-        <el-button type="primary" size="mini">{{
-          slotProps.row.name
-        }}</el-button>
+      <template v-slot:date="scope">
+        <div @click="getRowInfo(scope)">
+          <i class="el-icon-edit"></i>{{ scope.row.date }}
+        </div>
+      </template>
+      <template v-slot:sex2="scope">
+        <div @click="getRowInfo(scope)">
+          <i class="el-icon-edit"></i>{{ scope.row.sex2 }}
+        </div>
+      </template>
+      <template v-slot:edit="edit">
+        <el-button type="primary" size="mini">{{ edit.row.name }}</el-button>
       </template>
     </i-table>
   </div>
@@ -59,14 +59,14 @@ export default {
   },
   created() {
     this.myHeader = [
-      { label: "姓名", prop: "name", show: true },
-      { label: "年龄", prop: "age", show: true },
-      { label: "日期", prop: "date", show: true },
-      { label: "性别", prop: "sex", show: true },
-      { label: "性别", prop: "sex1", show: true },
-      { label: "性别", prop: "sex2", show: true },
-      { label: "性别", prop: "sex3", show: true },
-      { label: "性别", prop: "sex4", show: true },
+      { label: "姓名", prop: "name", show: true, other: false },
+      { label: "年龄", prop: "age", show: true, other: false },
+      { label: "日期", prop: "date", show: true, other: true },
+      { label: "性别", prop: "sex", show: true, other: false },
+      { label: "性别", prop: "sex1", show: true, other: false },
+      { label: "xx", prop: "sex2", show: true, other: true },
+      { label: "性别", prop: "sex3", show: true, other: false },
+      { label: "性别", prop: "sex4", show: true, other: false },
     ];
     this.myTableData = [
       {
@@ -144,6 +144,7 @@ export default {
     ];
   },
   methods: {
+    // 表格多选框点击
     getMultipleSelection(val) {
       console.log(val);
     },
@@ -161,6 +162,10 @@ export default {
       } else {
         this.myHeader[index]["show"] = this.myHeader[index]["show"];
       }
+    },
+    // 单元格点击
+    getRowInfo(row) {
+      console.log(row);
     },
   },
 };

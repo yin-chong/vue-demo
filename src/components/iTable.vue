@@ -25,6 +25,14 @@
         :min-width="100"
         v-if="col.show"
       >
+        <template slot-scope="scope">
+          <div v-if="!col.other">
+            {{ scope.row[col.prop] }}
+          </div>
+          <slot v-else :name="col.prop" :row="scope.row">
+            {{ scope.row[col.prop] }}
+          </slot>
+        </template>
       </el-table-column>
       <el-table-column
         label="操作"
@@ -33,7 +41,7 @@
         :width="editWidth"
       >
         <template slot-scope="scope">
-          <slot :row="scope.row"></slot>
+          <slot name="edit" :row="scope.row"></slot>
         </template>
       </el-table-column>
     </el-table>
@@ -70,7 +78,7 @@ export default {
     },
     editWidth: {
       type: Number,
-      default: 120,
+      default: "120",
     },
   },
   data() {
@@ -82,36 +90,18 @@ export default {
     // this.getTableHeader();
   },
   methods: {
-    // getTableHeader() {
-    //   this.rowHeader.forEach((el) => {
-    //     this.tableHeader.push(Object.assign({ show: true }, el));
-    //   });
-    // },
-    // // 重置全选
-    // checkedAllHearder() {
-    //   this.tableHeader.forEach((el) => {
-    //     el["show"] = true;
-    //   });
-    // },
-    // checkbox val改变
-    // handleCheckedBoxChange(index) {
-    //   let a = 0;
-    //   this.tableHeader.forEach((el) => (a += el.show ? 1 : 0));
-    //   if (a <= 0) {
-    //     this.tableHeader[index]["show"] = !this.tableHeader[index]["show"];
-    //     return this.$message.info("请至少选择一项!");
-    //   } else {
-    //     this.tableHeader[index]["show"] = this.tableHeader[index]["show"];
-    //   }
-    // },
     // 表格多选点击
     handleSelectionChange(val) {
       // console.log(val);
       this.$emit("multipleSelect", val);
     },
+    // 单元格点击
+    clickCell(row) {
+      this.$emit("cellClick", row);
+    },
   },
 };
 </script>
 
-<style lang="less" scoped>
+<style scoped>
 </style>

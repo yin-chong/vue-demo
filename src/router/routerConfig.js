@@ -17,6 +17,7 @@ import keep from '@/pages/keep/keep'
 import keep1 from '@/pages/keep/keep1'
 import myTable from '@/pages/myTable'
 import markDown from '@/pages/markDown'
+import directive from '@/pages/directive'
 
 export default [{
     path: '*',
@@ -174,6 +175,15 @@ export default [{
     meta: {
       index: 1,
       title: 'MarkDown'
+    }
+  },
+  {
+    path: '/directive',
+    name: 'directive',
+    component: directive,
+    meta: {
+      index: 1,
+      title: '指令'
     }
   },
   {
