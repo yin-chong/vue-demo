@@ -18,6 +18,7 @@ import keep1 from '@/pages/keep/keep1'
 import myTable from '@/pages/myTable'
 import markDown from '@/pages/markDown'
 import directive from '@/pages/directive'
+import GoJs from '@/pages/GoJs'
 
 export default [{
     path: '*',
@@ -184,6 +185,15 @@ export default [{
     meta: {
       index: 1,
       title: '指令'
+    }
+  },
+  {
+    path: '/GoJs',
+    name: 'GoJs',
+    component: GoJs,
+    meta: {
+      index: 1,
+      title: 'GoJs'
     }
   },
   {

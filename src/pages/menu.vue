@@ -48,6 +48,7 @@ export default {
       { icon: "#yfbj", url: "/Radio", title: "Radio" },
       { icon: "#zzdt", url: "/Loading", title: "Loading" },
       { icon: "#jczc", url: "/calendar", title: "日历" },
+      { icon: "#zzdt", url: "/GoJs", title: "GoJs" },
       { icon: "#yfbj", url: "/myTable", title: "自动化表格" },
       { icon: "#zzdt", url: "/markDown", title: "MarkDown" },
       { icon: "#OTO", url: "/keep", title: "keepAlive" },
