@@ -1,12 +1,12 @@
 <template>
   <div>
     <div id="myDiagramDiv" v-loading="load"></div>
-    <el-select v-model="link" placeholder="" class="mySelect">
+    <el-select v-model="path" placeholder="" class="mySelect" @change="getPath">
       <el-option
-        v-for="item in linkList"
-        :key="item.value"
-        :label="item.label"
-        :value="item.value"
+        v-for="(item, index) in pathList"
+        :key="index"
+        :label="item"
+        :value="index"
       >
       </el-option>
     </el-select>
@@ -22,9 +22,10 @@ export default {
     return {
       vr6,
       load: false,
-      linkList: [], // 路线列表
-      link: "", // 选中的路线
+      pathList: [], // 下拉框路线列表
+      path: "", // 下拉框选中的路线
       diagram: {},
+      paths: {}, //原始 图表路径
     };
   },
   mounted() {
@@ -196,13 +197,11 @@ export default {
       this.highlightPath(this.findShortestPath(begin, end));
     },
     listAllPaths(begin, end) {
-      let paths = null;
-      // compute and remember all paths from BEGIN to END: Lists of Nodes
-      paths = this.collectAllPaths(begin, end);
-      console.log(paths);
-      // paths.each(function (p) {
-      //   console.log(p);
-      // });
+      this.paths = this.collectAllPaths(begin, end);
+      this.pathList = [];
+      this.paths.each((el) => this.pathList.push(this.pathToString(el)));
+      console.log(this.pathList);
+      this.path = this.pathList[0] || "";
     },
     leastNode(coll, distances) {
       let bestdist = Infinity;
@@ -274,11 +273,22 @@ export default {
       find(begin, end);
       return coll;
     },
+    pathToString(path) {
+      let s = `${path.length}:`;
+      for (let i = 0; i < path.length; i++) {
+        if (i > 0) s += " -- ";
+        s += path.get(i).data.text;
+      }
+      return s;
+    },
+    getPath(i) {
+      this.highlightPath(this.paths.get(i));
+    },
   },
 };
 </script>
 
-<style scoped>
+<style scoped lang="less">
 #myDiagramDiv {
   position: relative;
   margin: 10px auto 30px;
@@ -287,6 +297,7 @@ export default {
   border: 1px solid;
 }
 .mySelect {
+  width: 300px;
   margin-left: 10%;
 }
 </style>
