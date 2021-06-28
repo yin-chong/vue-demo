@@ -1,6 +1,16 @@
 <template>
   <div>
     <div id="myDiagramDiv" v-loading="load"></div>
+    <div
+      class="tooltip"
+      v-show="showTool"
+      :style="{ left: `${pt.x + 70}px`, top: `${pt.y + 50}px` }"
+    >
+      {{ obj.text }}
+    </div>
+    <!-- <div v-show="showTooltip" class="tooltip"  :style="{left: `${pt.x + 10}px`, top: `${pt.y + 10}px}`}">
+        {{obj.text}}
+      </div> -->
     <el-select v-model="path" placeholder="" class="mySelect" @change="getPath">
       <el-option
         v-for="(item, index) in pathList"
@@ -26,6 +36,12 @@ export default {
       path: "", // 下拉框选中的路线
       diagram: {},
       paths: {}, //原始 图表路径
+      showTool: false, // 悬浮框 显示隐藏
+      pt: {
+        x: 0,
+        y: 0,
+      }, // 悬浮框位置
+      obj: {}, //悬浮选中的节点
     };
   },
   mounted() {
@@ -35,6 +51,10 @@ export default {
       "toolManager.mouseWheelBehavior": go.ToolManager.WheelNone, //鼠标滚轮事件禁止
       layout: $(go.LayeredDigraphLayout, { layerSpacing: 120 }), // 分层有向布局 layerSpacing 层间距
       maxSelectionCount: 2,
+    });
+    let myToolTip = $(go.HTMLInfo, {
+      show: this.showToolTip,
+      hide: this.hideToolTip,
     });
     myDiagram.linkTemplate = $(
       go.Link,
@@ -60,6 +80,9 @@ export default {
     myDiagram.nodeTemplate = $(
       go.Node,
       "Vertical",
+      {
+        toolTip: myToolTip,
+      },
       {
         selectionAdorned: true,
         selectionChanged: this.nodeSelectionChanged,
@@ -284,20 +307,47 @@ export default {
     getPath(i) {
       this.highlightPath(this.paths.get(i));
     },
+    showToolTip(obj) {
+      console.log(this.showTool);
+      if(this.showTool) return;
+      // let toolTipDIV = document.getElementById("showTooltip");
+      this.pt = this.diagram.lastInput.viewPoint;
+      console.log(this.pt);
+      this.obj = obj.data;
+      this.showTool = true;
+      // document.getElementById("toolTipParagraph").textContent =
+      //   "Tooltip for: " + obj.data.key;
+      // toolTipDIV.style.display = "block";
+    },
+    hideToolTip() {
+      this.showTool = false;
+    },
   },
 };
 </script>
 
 <style scoped lang="less">
 #myDiagramDiv {
-  position: relative;
+  // position: absolute;
   margin: 10px auto 30px;
   width: 80%;
   height: 400px;
   border: 1px solid;
+  z-index: 90;
 }
 .mySelect {
+  position: relative;
   width: 300px;
   margin-left: 10%;
+}
+.tooltip {
+  position: absolute;
+  z-index: 1000;
+  padding: 10px;
+  // width: 50px;
+  // height: 50px;
+  background-color: #fff;
+  border: 1px solid;
+  border-radius: 5px;
 }
 </style>
