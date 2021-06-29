@@ -4,9 +4,10 @@
     <div
       class="tooltip"
       v-show="showTool"
-      :style="{ left: `${pt.x + 70}px`, top: `${pt.y + 50}px` }"
+      :style="{ left: `${pt.x + 70}px`, top: `${pt.y + 10}px` }"
     >
       {{ obj.text }}
+      <el-button type="primary" @click="clickBtn">点击</el-button>
     </div>
     <!-- <div v-show="showTooltip" class="tooltip"  :style="{left: `${pt.x + 10}px`, top: `${pt.y + 10}px}`}">
         {{obj.text}}
@@ -309,9 +310,13 @@ export default {
     },
     showToolTip(obj) {
       console.log(this.showTool);
-      if(this.showTool) return;
+      // if(this.showTool) return;
       // let toolTipDIV = document.getElementById("showTooltip");
-      this.pt = this.diagram.lastInput.viewPoint;
+      if (!!this.pt.x && !!this.pt.y) return;
+      [this.pt.x, this.pt.y] = [
+        this.diagram.lastInput.viewPoint.x,
+        this.diagram.lastInput.viewPoint.y,
+      ];
       console.log(this.pt);
       this.obj = obj.data;
       this.showTool = true;
@@ -319,8 +324,15 @@ export default {
       //   "Tooltip for: " + obj.data.key;
       // toolTipDIV.style.display = "block";
     },
+    clickBtn() {
+      window.alert(this.obj.text);
+    },
     hideToolTip() {
       this.showTool = false;
+      this.pt = {
+        x: 0,
+        y: 0,
+      };
     },
   },
 };

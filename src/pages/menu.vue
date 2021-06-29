@@ -51,6 +51,7 @@ export default {
       { icon: "#zzdt", url: "/GoJs", title: "GoJs" },
       { icon: "#yfbj", url: "/myTable", title: "自动化表格" },
       { icon: "#zzdt", url: "/markDown", title: "MarkDown" },
+      { icon: "#jczc", url: "/hotPoint", title: "热点图" },
       { icon: "#OTO", url: "/keep", title: "keepAlive" },
     ];
     // this.$message({

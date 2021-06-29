@@ -19,6 +19,7 @@ import myTable from '@/pages/myTable'
 import markDown from '@/pages/markDown'
 import directive from '@/pages/directive'
 import GoJs from '@/pages/GoJs'
+import hotPoint from '@/pages/hotPoint'
 
 export default [{
     path: '*',
@@ -194,6 +195,15 @@ export default [{
     meta: {
       index: 1,
       title: 'GoJs'
+    }
+  },
+  {
+    path: '/hotPoint',
+    name: 'hotPoint',
+    component: hotPoint,
+    meta: {
+      index: 1,
+      title: '热点图'
     }
   },
   {
