@@ -20,6 +20,7 @@ import markDown from '@/pages/markDown'
 import directive from '@/pages/directive'
 import GoJs from '@/pages/GoJs'
 import hotPoint from '@/pages/hotPoint'
+import tree from '@/pages/tree'
 
 export default [{
     path: '*',
@@ -204,6 +205,15 @@ export default [{
     meta: {
       index: 1,
       title: '热点图'
+    }
+  },
+  {
+    path: '/tree',
+    name: 'tree',
+    component: tree,
+    meta: {
+      index: 1,
+      title: '树图'
     }
   },
   {
