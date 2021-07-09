@@ -1,89 +1,101 @@
 <template>
   <div>
-    <div id="myDiagramDiv" v-loading="load"></div>
+<treeselect
+ :multiple="true"
+  :options="options"
+  :disable-branch-nodes="true"
+  v-model="value"
+  search-nested
+  class="mySelect"
+  />
   </div>
 </template>
 
 <script>
-import go from "gojs";
-import vr6 from "@/assets/vr6.jpg";
-export default {
-  name: "tree",
-  data() {
-    return {
-      vr6,
-      load: false,
-      diagram: {},
-    };
-  },
-  mounted() {
-    let $ = go.GraphObject.make;
-    let myDiagram = $(go.Diagram, "myDiagramDiv", {
-      "toolManager.mouseWheelBehavior": go.ToolManager.WheelNone, //鼠标滚轮事件禁止
-      layout: $(go.TreeLayout, { angle: 90, layerSpacing: 120 }), // 分层有向布局 layerSpacing 层间距
-    });
-    myDiagram.nodeTemplate = $(
-      go.Node,
-      "Horizontal",
-      //   {
-      //     toolTip: myToolTip,
-      //   },
-      //   {
-      //     selectionAdorned: true,
-      //     selectionChanged: this.nodeSelectionChanged,
-      //   },
-      // $(
-      //   go.Shape,
-      //   "Circle",
-      //   {
-      //     stroke: null,
-      //     figure: "Circle",
-      //     portId: '',
-      //   },
-      //   new go.Binding("fill", "color")
-      // ),
-      $(go.Picture, { width: 80, height: 60 }, new go.Binding("source")),
-      $(
-        go.TextBlock,
-        {
-          //   font: "15px Helvetica, bold Arial, sans-serif", //字体
-          // stroke: "#fff", //颜色
-          margin: new go.Margin(5, 0, 0, 0),
-        },
-        new go.Binding("text", "text")
-      )
-    );
-    myDiagram.linkTemplate = $(
-      go.Link,
-      { routing: go.Link.Orthogonal, corner: 5 },
-      $(
-        go.Shape, // the link's path shape
-        { strokeWidth: 3, stroke: "#555" }
-      )
-    );
-    myDiagram.model = new go.GraphLinksModel([
-      { text: "节点1", key: 1, color: "#0e6cff", source: vr6 },
-      { text: "节点2", key: 2, color: "#ff8700", source: vr6, parent: 1 },
-      { text: "节点3", key: 3, color: "#04c193", source: vr6, parent: 1 },
-      { text: "节点4", key: 4, color: "#ED5565", source: vr6, parent: 2 },
-      { text: "节点5", key: 5, color: "#EC87C0", source: vr6, parent: 3 },
-      { text: "节点6", key: 6, color: "#F6BB42", source: vr6, parent: 2 },
-      { text: "节点7", key: 7, color: "#AC92EC", source: vr6, parent: 3 },
-      { text: "节点8", key: 8, color: "#AC92EC", source: vr6, parent: 2 },
-      { text: "节点9", key: 9, color: "#AC92EC", source: vr6, parent: 3 },
-      { text: "节点10", key: 10, color: "#AC92EC", source: vr6, parent: 2 },
-      { text: "节点11", key: 11, color: "#AC92EC", source: vr6, parent: 3 },
-    ]);
-  },
-};
+// import the component
+import Treeselect from '@riophae/vue-treeselect'
+// import the styles
+import '@riophae/vue-treeselect/dist/vue-treeselect.css'
+  export default {
+    name: 'tree',
+    components: {
+      Treeselect,
+    },
+    data () {
+      return {
+         value: [],
+        options: [ {
+          id: 'm',
+          label: 'McDonalds',
+          children: [ {
+            id: 'm-fries',
+            label: 'French Fries',
+          }, {
+            id: 'm-cheeseburger',
+            label: 'Cheeseburger',
+          }, {
+            id: 'm-white-cheedar-burger',
+            label: 'White Cheddar Burger',
+          }, {
+            id: 'm-southwest-buttermilk-crispy-chicken-salad',
+            label: 'Southwest Buttermilk Crispy Chicken Salad',
+          }, {
+            id: 'm-cola',
+            label: 'Coca-Cola®',
+          }, {
+            id: 'm-chocolate-shake',
+            label: 'Chocolate Shake',
+          } ],
+        }, {
+          id: 'kfc',
+          label: 'KFC',
+          children: [ {
+            id: 'kfc-fries',
+            label: 'French Fries',
+          }, {
+            id: 'kfc-chicken-litties-sandwiches',
+            label: 'Chicken Litties Sandwiches',
+          }, {
+            id: 'kfc-grilled-chicken',
+            label: 'Grilled Chicken',
+          }, {
+            id: 'kfc-cola',
+            label: 'Pepsi® Cola',
+          } ],
+        }, {
+          id: 'bk',
+          label: 'Burger King',
+          children: [ {
+            id: 'bk-chicken-fries',
+            label: 'Chicken Fries',
+          }, {
+            id: 'bk-chicken-nuggets',
+            label: 'Chicken Nuggets',
+          }, {
+            id: 'bk-garden-side-salad',
+            label: 'Garden Side Salad',
+          }, {
+            id: 'bk-cheeseburger',
+            label: 'Cheeseburger',
+          }, {
+            id: 'bk-bacon-king-jr-sandwich',
+            label: 'BACON KING™ Jr. Sandwich',
+          }, {
+            id: 'bk-cola',
+            label: 'Coca-Cola®',
+          }, {
+            id: 'bk-oreo-chocolate-shake',
+            label: 'OREO® Chocolate Shake',
+          } ],
+        } ],
+      }
+    }
+  }
 </script>
 
 <style scoped>
-#myDiagramDiv {
-  margin: 10px auto 30px;
-  width: 80%;
-  height: 400px;
-  border: 1px solid;
-  z-index: 90;
+.mySelect {
+  width: 50%;
+  margin: 30px auto;
 }
 </style>
