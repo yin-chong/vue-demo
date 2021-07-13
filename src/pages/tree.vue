@@ -1,43 +1,21 @@
 <template>
-  <div>
-    <!-- <el-select
+  <div class="mySelect">
+    <tree-select
       v-model="value"
-      placeholder="请选择..."
-      style="width: 16rem"
       multiple
-      clearable
-    >
-      <el-option
-        :value="treeValue"
-        style="height: auto"
-      >
-        <el-tree
-          ref="tree"
-          :data="options"
-          default-expand-all
-          node-key="id"
-          draggable
-          show-checkbox
-          :allow-drop="allowDrop"
-          :allow-drag="allowDrag"
-          @check="handleNodeClick"
-        />
-      </el-option>
-    </el-select> -->
-    <tree-select v-model="value" multiple filterable draggable :options="options" @removeTag="removeTag"></tree-select>
+      filterable
+      draggable
+      size="small"
+      :options="options"
+      @remove-tag="removeTag"
+      @remoteMethod="remoteMethod"
+    ></tree-select>
   </div>
 </template>
 
 <script>
-// import the component
-import Treeselect from "@riophae/vue-treeselect";
-// import the styles
-import "@riophae/vue-treeselect/dist/vue-treeselect.css";
 export default {
   name: "tree",
-  components: {
-    Treeselect,
-  },
   data() {
     return {
       value: [],
@@ -132,31 +110,38 @@ export default {
     };
   },
   methods: {
-    handleNodeClick(val) {
-      // console.log(node, keys);
-      return console.log(this.value, val);
-      // 选中父节点
-      let [treeDataValue, treeData] = [[], []];
-      keys.checkedNodes.forEach((el) => {
-        if (!el.hasOwnProperty("children")) {
-          treeDataValue.push(el.id);
-          treeData.push(el.label);
-        }
-      });
-      [this.treeValue, this.value] = [treeDataValue, treeData];
-      // this.treeDataValue = keys.checkedKeys;
-      // this.treeData = data.label;
-    },
+    // handleNodeClick(val) {
+    //   // console.log(node, keys);
+    //   return console.log(this.value, val);
+    //   // 选中父节点
+    //   let [treeDataValue, treeData] = [[], []];
+    //   keys.checkedNodes.forEach((el) => {
+    //     if (!el.hasOwnProperty("children")) {
+    //       treeDataValue.push(el.id);
+    //       treeData.push(el.label);
+    //     }
+    //   });
+    //   [this.treeValue, this.value] = [treeDataValue, treeData];
+    //   // this.treeDataValue = keys.checkedKeys;
+    //   // this.treeData = data.label;
+    // },
     // 多选模式下移除tag
     removeTag(i) {
-      this.value.splice(i, 1)
-    }
+      this.value.splice(i, 1);
+    },
+    /**
+     * @param query
+     * 搜索筛选
+     */
+    remoteMethod(query) {
+      console.log(query);
+    },
   },
   watch: {
-    value: function(newVal) {
+    value: function (newVal) {
       console.log(newVal);
-    }
-  }
+    },
+  },
 };
 </script>
 

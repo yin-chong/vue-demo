@@ -1,60 +1,79 @@
 <template>
-  <el-select
-    v-model="treeValue"
-    placeholder="请选择..."
-    :style="{width: width + 'px'}"
-    :multiple="multiple"
-    :size="size"
-    :filterable="filterable"
-    @remove-tag="removeTag"
-  >
-    <el-option
-      :value="treeValue"
-      style="height: auto"
+  <div class="select">
+    <el-select
+      v-model="treeValue"
+      placeholder="请选择..."
+      :style="{width: width + 'px'}"
+      :multiple="multiple"
+      :size="size"
+      :filterable="filterable"
+      :remote="filterable"
+      :remote-method="remoteMethod"
     >
-      <el-tree
-        ref="tree"
-        :data="options"
-        default-expand-all
-        node-key="id"
-        :draggable = "draggable"
-        :show-checkbox="multiple"
-        :allow-drop="allowDrop"
-        :allow-drag="allowDrag"
-        @check="handleCheck"
-        @node-click="handleNodeClick"
-      />
-    </el-option>
-  </el-select>
+      <el-option
+        :value="treeValue"
+        style="height: auto"
+        v-loading="loading"
+        element-loading-custom-class="mytree-loading"
+      >
+        <el-tree
+          ref="tree"
+          :data="options"
+          default-expand-all
+          node-key="id"
+          :draggable="draggable"
+          :show-checkbox="multiple"
+          :allow-drop="allowDrop"
+          :allow-drag="allowDrag"
+          @check="handleCheck"
+          @node-click="handleNodeClick"
+        >
+          <span
+            class="custom-tree-node"
+            slot-scope="{ node, data }"
+          >
+            <span @click="getNodeData(data)">{{ node.label }}</span>
+            <!-- <el-input
+              v-model="node.data.label"
+              placeholder=""
+              size="mini"
+              clearable
+              @change="getNodeData(node,data)"
+            ></el-input> -->
+          </span>
+        </el-tree>
+      </el-option>
+    </el-select>
+  </div>
 </template>
 
 <script>
 export default {
   name: "treeSelect",
   model: {
-    prop: 'value',
-    event: 'change'
+    prop: "value",
+    event: "change",
   },
   props: {
     value: {
       type: [Array, String],
       required: true,
-      default: '',
+      default: "",
     },
     // 宽
     width: {
       type: Number,
-      default: 300
+      default: 300,
     },
-    // select 尺寸
+    // select 尺寸 medium/small/mini
     size: {
       type: String,
-      default: 'small'
+      default: "small",
     },
     // 是否可搜索
     filterable: {
       type: Boolean,
-      default: false
+      default: false,
     },
     // // 选中的label
     // treeValue: {
@@ -65,20 +84,26 @@ export default {
     // 是否可拖拽
     draggable: {
       type: Boolean,
-      default: false, 
+      default: false,
     },
     // tree data
     options: {
       type: Array,
       default: [],
-      required: true
+      required: true,
     },
     // 是否多选
     multiple: {
       type: Boolean,
       default: false,
-      required: false
-    }
+      required: false,
+    },
+    // loading
+    loading: {
+      type: Boolean,
+      default: false,
+      required: false,
+    },
   },
   data() {
     return {
@@ -86,10 +111,14 @@ export default {
     };
   },
   methods: {
+    // 拖拽
     allowDrop(draggingNode, dropNode, type) {
+      if (!this.allowDrop) return void 666;
       return true;
     },
+    // 拖拽
     allowDrag(draggingNode) {
+      if (!this.allowDrop) return void 666;
       return true;
     },
     // 多选 选中
@@ -104,37 +133,57 @@ export default {
         }
       });
       [this.treeValue] = [treeValue];
-      console.log(treeValue);
-      this.$emit('change', value)
+      this.$emit("change", value);
       // console.log(this.value, );
       // this.treeValue = keys.checkedKeys;
       // this.value = data.label;
     },
-    // 多选模式下移除tag时触发
-    removeTag(val) {
-      console.log(this.$refs.tree.getCheckedKeys());
-      const i = this.treeValue.findIndex(el => el === val);
-      // console.log(val, i);
-      // value.splice(i, 1);
-      // console.log(value, this.value);
-      this.$refs.tree.setChecked(this.value[i], false)
-      this.$emit('removeTag', i)
+    /**
+     * 数组相减
+     * @param treeValue oldVal
+     * @param treeValue newVal
+     * @return remove的tag的index
+     */
+    arrSubtraction(a, b) {
+      if (Array.isArray(a) && Array.isArray(b)) {
+        const c = a.filter((i) => !b.includes(i));
+        return a.indexOf(c[0]);
+      }
     },
     // 节点 单选
     handleNodeClick(node) {
-      if(!!this.multiple) return
-      if(!node.hasOwnProperty('children')) {
+      if (!!this.multiple) return;
+      if (!node.hasOwnProperty("children")) {
         this.treeValue = node.label;
-        this.$emit('change', node.id)
+        this.$emit("change", node.id);
+      }
+    },
+    // select 搜索筛选
+    remoteMethod(query) {
+      this.$emit("remoteMethod", query);
+    },
+    // tree node点击
+    getNodeData(node, data) {
+      console.log(node, data);
+      console.log(this.options);
+    },
+  },
+  watch: {
+    // 监听tag移除
+    treeValue: function (newVal, oldVal) {
+      if (!this.multiple) return;
+      if (oldVal.length > newVal.length) {
+        const i = this.arrSubtraction(oldVal, newVal);
+        this.$refs.tree.setChecked(this.value[i], false);
+        this.$emit("remove-tag", i);
       }
     },
   },
 };
 </script>
 
-<style scoped>
-.mySelect {
-  width: 50%;
-  margin: 30px auto;
+<style lang="less">
+.mytree-loading{
+  top: -53%;
 }
 </style>
