@@ -41,7 +41,7 @@ export default {
     multiple: {
       // 多图开关
       type: Boolean,
-      default: false
+      default: true
     },
     initUrl: {
       // 初始图片链接
@@ -119,6 +119,7 @@ export default {
       // 弹出剪裁框，将当前文件设置为文件
       this.cropperModel = true;
       this.file = file;
+      if(this.multiple) this.uploadList = [...fileList];
       // this.uploadList = fileList;
     },
     /************************************************************************************/
@@ -219,7 +220,6 @@ export default {
     },
     beforeClose () {
       // this.uploadList.pop();
-      console.log(this.uploadList);
       this.cropperModel = false;
     },
     // 压缩图片

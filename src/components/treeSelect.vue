@@ -25,6 +25,8 @@
           :show-checkbox="multiple"
           :allow-drop="allowDrop"
           :allow-drag="allowDrag"
+          :lazy="lazy"
+          :load="loadNode"
           @check="handleCheck"
           @node-click="handleNodeClick"
         >
@@ -104,6 +106,12 @@ export default {
       default: false,
       required: false,
     },
+    // 懒加载
+    lazy: {
+      type: Boolean,
+      default: false,
+      required: false
+    }
   },
   data() {
     return {
@@ -167,6 +175,25 @@ export default {
       console.log(node, data);
       console.log(this.options);
     },
+    loadNode(node, resolve) {
+      if(!this.lazy) return;
+      console.log(node, resolve);
+      if (node.level === 0) {
+          return resolve([{ label: 'McDonalds' }]);
+        }
+        if (node.level > 1) return resolve([]);
+
+        // setTimeout(() => {
+        //   const data = [{
+        //     name: 'leaf',
+        //     leaf: true
+        //   }, {
+        //     name: 'zone'
+        //   }];
+
+        //   resolve(data);
+        // }, 500);
+    }
   },
   watch: {
     // 监听tag移除
