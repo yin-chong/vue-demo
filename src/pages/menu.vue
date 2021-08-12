@@ -53,6 +53,7 @@ export default {
       { icon: "#zzdt", url: "/markDown", title: "MarkDown" },
       { icon: "#jczc", url: "/hotPoint", title: "热点图" },
       { icon: "#zzdt", url: "/tree", title: "树图" },
+      { icon: "#jkgl", url: "/agGrid", title: "AG Grid" },
       { icon: "#OTO", url: "/keep", title: "keepAlive" },
     ];
     // this.$message({
