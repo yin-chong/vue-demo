@@ -87,5 +87,9 @@ export default {
     width: 90%;
     height: 800px;
   }
+
+  /deep/ .ag-watermark {
+    display: none;
+  }
 }
 </style>

@@ -22,6 +22,7 @@ import GoJs from '@/pages/GoJs'
 import hotPoint from '@/pages/hotPoint'
 import tree from '@/pages/tree'
 import agGrid from '@/pages/agGrid'
+import draggable from '@/pages/draggable'
 
 export default [{
   path: '*',
@@ -224,6 +225,15 @@ export default [{
   meta: {
     index: 1,
     title: 'AG Grid'
+  }
+},
+{
+  path: '/draggable',
+  name: 'draggable',
+  component: draggable,
+  meta: {
+    index: 1,
+    title: 'draggable'
   }
 },
 {

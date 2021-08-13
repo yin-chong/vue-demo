@@ -54,6 +54,7 @@ export default {
       { icon: "#jczc", url: "/hotPoint", title: "热点图" },
       { icon: "#zzdt", url: "/tree", title: "树图" },
       { icon: "#jkgl", url: "/agGrid", title: "AG Grid" },
+      { icon: "#yfbj", url: "/draggable", title: "vue-draggable" },
       { icon: "#OTO", url: "/keep", title: "keepAlive" },
     ];
     // this.$message({
