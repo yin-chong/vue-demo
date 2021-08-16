@@ -8,6 +8,7 @@
       :size="size"
       :filterable="filterable"
       :remote="filterable"
+      :collapse-tags="collapseTags"
       :remote-method="remoteMethod"
     >
       <el-option
@@ -99,6 +100,12 @@ export default {
       type: Boolean,
       default: false,
       required: false,
+    },
+    // 多选  将tag合并为一段文字
+    collapseTags: {
+      type: Boolean,
+      default: false,
+      required: false
     },
     // loading
     loading: {

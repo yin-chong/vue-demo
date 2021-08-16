@@ -79,9 +79,9 @@ export default {
       //  console.log(e)
       console.log(this.arr2);
       if (this.arr2.length === 0) return true;
-      var that = this;
+      let that = this;
 
-      var items = this.arr2.filter(function (m) {
+      let items = this.arr2.filter(function (m) {
         return m.id == that.moveId;
       });
       //如果左边
@@ -91,8 +91,8 @@ export default {
     //右边往左边拖动时的事件
     end2(e) {
       console.log(e);
-      var that = this;
-      var items = this.arr1.filter(function (m) {
+      let that = this;
+      let items = this.arr1.filter(function (m) {
         return m.id == that.moveId;
       });
       //如果左边
@@ -115,9 +115,9 @@ export default {
 Array.prototype.filter =
   Array.prototype.filter ||
   function (func) {
-    var arr = this;
-    var r = [];
-    for (var i = 0; i < arr.length; i++) {
+    let arr = this;
+    let r = [];
+    for (let i = 0; i < arr.length; i++) {
       if (func(arr[i], i, arr)) {
         r.push(arr[i]);
       }
