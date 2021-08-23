@@ -51,7 +51,10 @@ export default {
     let myDiagram = $(go.Diagram, "myDiagramDiv", {
       "toolManager.mouseWheelBehavior": go.ToolManager.WheelNone, //鼠标滚轮事件禁止
       layout: $(go.LayeredDigraphLayout, { layerSpacing: 120 }), // 分层有向布局 layerSpacing 层间距
-      maxSelectionCount: 2,
+      // layout: $(go.TreeLayout, { nodeSpacing: 20 }),
+      //   layout: $(go.TreeLayout,
+      //         { angle: 90, sorting: go.TreeLayout.SortingAscending }, { nodeSpacing: 300 }),
+      // maxSelectionCount: 2,
     });
     let myToolTip = $(go.HTMLInfo, {
       show: this.showToolTip,
@@ -143,6 +146,14 @@ export default {
         { text: "节点6", key: 6, color: "#F6BB42", source: vr6 },
         { text: "节点7", key: 7, color: "#AC92EC", source: vr6 },
       ],
+      // [
+      //   { from: 1, to: 2},
+      //   { from: 1, to: 3},
+      //   { from: 2, to: 4},
+      //   { from: 2, to: 5},
+      //   { from: 3, to: 6},
+      //   { from: 3, to: 7}
+      // ]
       [
         { from: 1, to: 2 },
         { from: 3, to: 2 },
