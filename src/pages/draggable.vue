@@ -7,7 +7,7 @@
         <draggable
           v-model="arr1"
           @end="end1"
-          :options="{group:{name: 'itxst',pull:'clone'},sort: true}"
+          :options="{group:{name: 'itxst',pull:'clone'},sort: false}"
           animation="300"
           :move="onMove"
         >

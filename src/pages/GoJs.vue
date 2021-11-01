@@ -50,10 +50,10 @@ export default {
 
     let myDiagram = $(go.Diagram, "myDiagramDiv", {
       "toolManager.mouseWheelBehavior": go.ToolManager.WheelNone, //鼠标滚轮事件禁止
-      layout: $(go.LayeredDigraphLayout, { layerSpacing: 120 }), // 分层有向布局 layerSpacing 层间距
+      // layout: $(go.LayeredDigraphLayout), // 分层有向布局 layerSpacing 层间距 nodeSpacing  节点间距
       // layout: $(go.TreeLayout, { nodeSpacing: 20 }),
-      //   layout: $(go.TreeLayout,
-      //         { angle: 90, sorting: go.TreeLayout.SortingAscending }, { nodeSpacing: 300 }),
+      layout: $(go.TreeLayout,
+            { angle: 90,layerSpacing: 30, sorting: go.TreeLayout.SortingAscending }, { nodeSpacing: 100 }),
       // maxSelectionCount: 2,
     });
     let myToolTip = $(go.HTMLInfo, {
@@ -64,7 +64,7 @@ export default {
       go.Link,
       {
         selectable: true, // 线条是否可点击
-        curve: go.Link.Bezier, // 线条形状 曲线
+        // curve: go.Link.Bezier, // 线条形状 曲线
         // layerName: "Background", // 不要在任何节点前面交叉
       },
       $(
@@ -102,6 +102,7 @@ export default {
       //   new go.Binding("fill", "color")
       // ),
       $(go.Picture, { width: 80, height: 60 }, new go.Binding("source")),
+      // $(go.Panel, "Vertical", { defaultAlignment: go.Spot.Left },),
       $(
         go.TextBlock,
         {
@@ -136,15 +137,47 @@ export default {
       }
     };
 
+    myDiagram.groupTemplate = $(
+      go.Group, "Auto",
+    // declare the Group.layout:
+    { layout: $(go.LayeredDigraphLayout,
+                { direction: 0, columnSpacing: 10 }) ,
+              isSubGraphExpanded: false,
+                },
+    
+    $(go.Shape, "RoundedRectangle",  // surrounds everything
+      { parameter1: 10, fill: "rgba(128,128,128,0.33)" }),
+    $(go.Panel, "Vertical", // position header above the subgraph
+      $("SubGraphExpanderButton"), 
+      $(go.TextBlock,     // group title near top, next to button
+        { font: "Bold 12pt Sans-Serif" },
+        new go.Binding("text", "text")),
+      $(go.Placeholder,     // represents area for all member parts
+        { padding: 5, background: "white" })
+    )
+    );
+
     myDiagram.model = new go.GraphLinksModel(
       [
-        { text: "节点1", key: 1, color: "#0e6cff", source: vr6 },
-        { text: "节点2", key: 2, color: "#ff8700", source: vr6 },
-        { text: "节点3", key: 3, color: "#04c193", source: vr6 },
-        { text: "节点4", key: 4, color: "#ED5565", source: vr6 },
-        { text: "节点5", key: 5, color: "#EC87C0", source: vr6 },
-        { text: "节点6", key: 6, color: "#F6BB42", source: vr6 },
-        { text: "节点7", key: 7, color: "#AC92EC", source: vr6 },
+        { text: "节点1", key: 1, color: "#0e6cff", source: vr6, isGroup: true },
+        { text: "节点2", key: 2, color: "#ff8700", source: vr6, isGroup: true, group: 1 },
+        { text: "节点3", key: 3, color: "#04c193", source: vr6, isGroup: true, group: 1 },
+        { text: "节点4", key: 4, color: "#ED5565", source: vr6, isGroup: true, group: 1 },
+        { text: "节点5", key: 5, color: "#EC87C0", source: vr6, group: 2 },
+        { text: "节点6", key: 6, color: "#F6BB42", source: vr6, group: 2 },
+        { text: "节点7", key: 7, color: "#AC92EC", source: vr6, group: 3 },
+        { text: "节点8", key: 8, color: "#AC92EC", source: vr6, group: 3 },
+        { text: "节点9", key: 9, color: "#AC92EC", source: vr6, group: 3 },
+        { text: "节点10", key: 10, color: "#AC92EC", source: vr6, group: 4 },
+        { text: "节点11", key: 11, color: "#AC92EC", source: vr6, group: 4 },
+        { text: "节点12", key: 12, color: "#AC92EC", source: vr6, group: 4 },
+        { text: "节点13", key: 13, color: "#AC92EC", source: vr6, group: 4 },
+        { text: "节点14", key: 14, color: "#AC92EC", source: vr6, group: 4 },
+        { text: "节点15", key: 15, color: "#AC92EC", source: vr6, group: 4, isGroup: true },
+        { text: "节点16", key: 16, color: "#AC92EC", source: vr6, group: 15 },
+        { text: "节点17", key: 17, color: "#AC92EC", source: vr6, group: 15 },
+        { text: "节点18", key: 18, color: "#AC92EC", source: vr6, group: 15 },
+        { text: "节点19", key: 19, color: "#AC92EC", source: vr6, group: 15 },
       ],
       // [
       //   { from: 1, to: 2},
@@ -155,16 +188,30 @@ export default {
       //   { from: 3, to: 7}
       // ]
       [
-        { from: 1, to: 2 },
-        { from: 3, to: 2 },
-        { from: 1, to: 7 },
-        { from: 6, to: 2 },
-        { from: 2, to: 1 },
-        { from: 4, to: 5 },
-        { from: 4, to: 7 },
-        { from: 7, to: 5 },
-        { from: 5, to: 7 },
-        { from: 3, to: 5 },
+        // { from: 1, to: 2 },
+        // { from: 1, to: 3 },
+        // { from: 1, to: 4 },
+        { from: 2, to: 3 },
+        { from: 3, to: 4 },
+        { from: 5, to: 6 },
+        { from: 7, to: 8 },
+        { from: 8, to: 9 },
+        // { from: 4, to: 8 },
+        // { from: 4, to: 7 },
+        // { from: 3, to: 9 },
+        // { from: 3, to: 10 },
+        // { from: 3, to: 11 },
+        { from: 10, to: 11 },
+        { from: 10, to: 12 },
+        { from: 11, to: 12 },
+        { from: 12, to: 13 },
+        { from: 14, to: 15 },
+        { from: 13, to: 15 },
+        { from: 16, to: 17 },
+        { from: 17, to: 18 },
+        { from: 17, to: 19 },
+        { from: 18, to: 19 },
+        // { from: 9, to: 11 },
       ]
     );
     this.diagram = myDiagram;
@@ -354,7 +401,7 @@ export default {
   // position: absolute;
   margin: 10px auto 30px;
   width: 80%;
-  height: 400px;
+  height: 100vh;
   border: 1px solid;
   z-index: 90;
 }

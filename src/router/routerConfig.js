@@ -23,6 +23,9 @@ import hotPoint from '@/pages/hotPoint'
 import tree from '@/pages/tree'
 import agGrid from '@/pages/agGrid'
 import draggable from '@/pages/draggable'
+import scroll from '@/pages/scroll'
+import editorWrap from '@/pages/editorWrap'
+import three from '@/pages/three'
 
 export default [{
   path: '*',
@@ -183,6 +186,15 @@ export default [{
   }
 },
 {
+  path: '/three',
+  name: 'three',
+  component: three,
+  meta: {
+    index: 1,
+    title: 'Three.js'
+  }
+},
+{
   path: '/directive',
   name: 'directive',
   component: directive,
@@ -234,6 +246,24 @@ export default [{
   meta: {
     index: 1,
     title: 'draggable'
+  }
+},
+{
+  path: '/scroll',
+  name: 'scroll',
+  component: scroll,
+  meta: {
+    index: 1,
+    title: 'scroll'
+  }
+},
+{
+  path: '/editorWrap',
+  name: 'editorWrap',
+  component: editorWrap,
+  meta: {
+    index: 1,
+    title: 'editorWrap'
   }
 },
 {

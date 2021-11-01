@@ -5,6 +5,7 @@
       multiple
       filterable
       draggable
+      collapseTags
       size="small"
       :options="options"
       @remove-tag="removeTag"

@@ -56,6 +56,9 @@ export default {
       { icon: "#jkgl", url: "/agGrid", title: "AG Grid" },
       { icon: "#yfbj", url: "/draggable", title: "vue-draggable" },
       { icon: "#OTO", url: "/keep", title: "keepAlive" },
+      { icon: "#zzdt", url: "/scroll", title: "滚动" },
+      { icon: "#jczc", url: "/editorWrap", title: "editorWrap" },
+      { icon: "#jczc", url: "/three", title: "three.js" },
     ];
     // this.$message({
     //   type: 'success',

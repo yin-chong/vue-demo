@@ -138,6 +138,7 @@ export default {
     },
     // 多选 选中
     handleCheck(node, keys) {
+      // return;
       // console.log(node, keys);
       let [treeValue, value] = [[], []];
       keys.checkedNodes.forEach((el) => {
