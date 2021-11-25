@@ -4,14 +4,6 @@
       id="myDiagramDiv"
       v-loading="load"
     ></div>
-    <!-- <div
-      class="tooltip"
-      v-show="showTool"
-      :style="{ left: `${pt.x + 70}px`, top: `${pt.y + 10}px` }"
-    >
-      {{ obj.text }}
-      <el-button type="primary" @click="clickBtn">点击</el-button>
-    </div> -->
     <div
       role="tooltip"
       v-show="showTool"
@@ -23,15 +15,6 @@
       <div class="tooltip-info">资产详情</div>
       <div class="tooltip-arrow"></div>
     </div>
-    <!-- <el-select v-model="path" placeholder="" class="mySelect" @change="getPath">
-      <el-option
-        v-for="(item, index) in pathList"
-        :key="index"
-        :label="item"
-        :value="index"
-      >
-      </el-option>
-    </el-select> -->
   </div>
 </template>
 
@@ -116,29 +99,6 @@ export default {
       )
     );
 
-    // myDiagram.toolManager.clickSelectingTool.standardMouseSelect = function () {
-    //   const diagram = this.diagram;
-    //   if (!!!diagram || !diagram.allowSelect) return;
-    //   const e = diagram.lastInput;
-    //   const count = diagram.selection.count;
-    //   const curobj = diagram.findPartAt(e.documentPoint, false);
-    //   if (!!curobj) {
-    //     if (count < 2) {
-    //       if (!curobj.isSelected) {
-    //         let part = curobj;
-    //         if (!!part) part.isSelected = true;
-    //       }
-    //     } else {
-    //       if (!curobj.isSelected) {
-    //         const part = curobj;
-    //         if (!!part) diagram.select(part);
-    //       }
-    //     }
-    //   } else if (e.left && !(e.control || e.meta) && !e.shift) {
-    //     diagram.clearSelection();
-    //   }
-    // };
-
     myDiagram.groupTemplate = $(
       go.Group,
       "Auto",
@@ -147,9 +107,9 @@ export default {
         layout: $(go.LayeredDigraphLayout, { direction: 0, columnSpacing: 10 }),
         // isSubGraphExpanded: true,
       },
-      {
-        toolTip: myToolTip,
-      },
+      // {
+      //   toolTip: myToolTip,
+      // },
          // 外层形状
       $(go.Shape, "RoundedRectangle", {
         fill: "rgba(44,130,255,0.15)",
@@ -265,28 +225,12 @@ export default {
         { text: "节点18", key: 18, color: "#AC92EC", source: vr6, group: 15 },
         { text: "节点19", key: 19, color: "#AC92EC", source: vr6, group: 15 },
       ],
-      // [
-      //   { from: 1, to: 2},
-      //   { from: 1, to: 3},
-      //   { from: 2, to: 4},
-      //   { from: 2, to: 5},
-      //   { from: 3, to: 6},
-      //   { from: 3, to: 7}
-      // ]
       [
-        // { from: 1, to: 2 },
-        // { from: 1, to: 3 },
-        // { from: 1, to: 4 },
         { from: 2, to: 3 },
         { from: 3, to: 4 },
         { from: 5, to: 6 },
         { from: 7, to: 8 },
         { from: 8, to: 9 },
-        // { from: 4, to: 8 },
-        // { from: 4, to: 7 },
-        // { from: 3, to: 9 },
-        // { from: 3, to: 10 },
-        // { from: 3, to: 11 },
         { from: 10, to: 11 },
         { from: 10, to: 12 },
         { from: 11, to: 12 },
@@ -297,7 +241,6 @@ export default {
         { from: 17, to: 18 },
         { from: 17, to: 19 },
         { from: 18, to: 19 },
-        // { from: 9, to: 11 },
       ]
     );
     this.diagram = myDiagram;
@@ -356,157 +299,7 @@ export default {
         }
       }
     },
-    nodeSelectionChanged(node) {
-      const diagram = node.diagram;
-      if (!!!diagram) return;
-      diagram.clearHighlighteds();
-      if (node.isSelected) {
-        const begin = diagram.selection.first();
-        this.showDistances(begin);
-        if (diagram.selection.count === 2) {
-          const end = node;
-          this.highlightShortestPath(begin, end);
-          this.listAllPaths(begin, end);
-        }
-      }
-    },
-    showDistances(begin) {
-      const distances = this.findDistances(begin);
-      const it = distances.iterator;
-      while (it.next()) {
-        const n = it.key;
-        const dist = it.value;
-        this.diagram.model.setDataProperty(n.data, "distance", dist);
-      }
-    },
-    findDistances(source) {
-      const diagram = source.diagram;
-      const distances = new go.Map(/*go.Node, "number"*/);
-      const nit = diagram.nodes;
-      while (nit.next()) {
-        const n = nit.value;
-        distances.set(n, Infinity);
-      }
-      distances.set(source, 0);
-      const seen = new go.Set(/*go.Node*/);
-      seen.add(source);
-      const finished = new go.Set(/*go.Node*/);
-      while (seen.count > 0) {
-        const least = this.leastNode(seen, distances);
-        const leastdist = distances.get(least);
-        seen.delete(least);
-        finished.add(least);
-        const it = least.findLinksOutOf();
-        while (it.next()) {
-          const link = it.value;
-          const neighbor = link.getOtherNode(least);
-          if (finished.has(neighbor)) continue;
-          const neighbordist = distances.get(neighbor);
-          const dist = leastdist + 1;
-          if (dist < neighbordist) {
-            if (neighbordist === Infinity) {
-              seen.add(neighbor);
-            }
-            distances.set(neighbor, dist);
-          }
-        }
-      }
-
-      return distances;
-    },
-    highlightShortestPath(begin, end) {
-      this.highlightPath(this.findShortestPath(begin, end));
-    },
-    listAllPaths(begin, end) {
-      this.paths = this.collectAllPaths(begin, end);
-      this.pathList = [];
-      this.paths.each((el) => this.pathList.push(this.pathToString(el)));
-      this.path = this.pathList[0] || "";
-    },
-    leastNode(coll, distances) {
-      let bestdist = Infinity;
-      let bestnode = null;
-      const it = coll.iterator;
-      while (it.next()) {
-        const n = it.value;
-        const dist = distances.get(n);
-        if (dist < bestdist) {
-          bestdist = dist;
-          bestnode = n;
-        }
-      }
-      return bestnode;
-    },
-    findShortestPath(begin, end) {
-      // compute and remember the distance of each node from the BEGIN node
-      let distances = this.findDistances(begin);
-
-      // now find a path from END to BEGIN, always choosing the adjacent Node with the lowest distance
-      let path = new go.List();
-      path.add(end);
-      while (!!end) {
-        let next = this.leastNode(end.findNodesInto(), distances);
-        if (!!next) {
-          if (distances.get(next) < distances.get(end)) {
-            path.add(next); // making progress towards the beginning
-          } else {
-            next = null; // nothing better found -- stop looking
-          }
-        }
-        end = next;
-      }
-      // reverse the list to start at the node closest to BEGIN that is on the path to END
-      // NOTE: if there's no path from BEGIN to END, the first node won't be BEGIN!
-      path.reverse();
-      return path;
-    },
-    highlightPath(path) {
-      this.diagram.clearHighlighteds();
-      for (let i = 0; i < path.count - 1; i++) {
-        let f = path.get(i);
-        let t = path.get(i + 1);
-        f.findLinksTo(t).each(function (l) {
-          l.isHighlighted = true;
-        });
-      }
-    },
-    collectAllPaths(begin, end) {
-      const stack = new go.List(/*go.Node*/);
-      const coll = new go.List(/*go.List*/);
-
-      function find(source, end) {
-        source.findNodesOutOf().each(function (n) {
-          if (n === source) return;
-          if (n === end) {
-            let path = stack.copy();
-            path.add(end);
-            coll.add(path);
-          } else if (!stack.has(n)) {
-            stack.add(n);
-            find(n, end);
-            stack.removeAt(stack.count - 1);
-          }
-        });
-      }
-
-      stack.add(begin);
-      find(begin, end);
-      return coll;
-    },
-    pathToString(path) {
-      let s = `${path.length}:`;
-      for (let i = 0; i < path.length; i++) {
-        if (i > 0) s += " -- ";
-        s += path.get(i).data.text;
-      }
-      return s;
-    },
-    getPath(i) {
-      this.highlightPath(this.paths.get(i));
-    },
     showToolTip(obj) {
-      // if(this.showTool) return;
-      // let toolTipDIV = document.getElementById("showTooltip");
       if (!!this.pt.x && !!this.pt.y) return;
       [this.pt.x, this.pt.y] = [
         this.diagram.lastInput.viewPoint.x,
